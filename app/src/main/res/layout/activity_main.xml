@@ -25,4 +25,22 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"/>
 
+  <Button
+      android:id="@+id/btn_share_text"
+      android:text="share Text"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"/>
+
+  <Button
+      android:id="@+id/btn_share_stream"
+      android:text="share Stream"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"/>
+
+  <Button
+      android:id="@+id/btn_share_stream_mult"
+      android:text="share Stream Mult"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"/>
+
 </LinearLayout>

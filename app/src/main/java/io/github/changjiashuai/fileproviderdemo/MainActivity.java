@@ -16,12 +16,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
   private Button btnInt;
   private Button btnExt;
   private Button btnRead;
+  private Button btnShareText;
+  private Button btnShareStream;
+  private Button btnShareStreamMult;
   private static final String sharedFileDir = "files";
   private static final String TAG = "MainActivity";
 
@@ -32,9 +36,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     btnInt = (Button) findViewById(R.id.btn_int);
     btnExt = (Button) findViewById(R.id.btn_ext);
     btnRead = (Button) findViewById(R.id.btn_read);
+    btnShareText = (Button) findViewById(R.id.btn_share_text);
+    btnShareStream = (Button) findViewById(R.id.btn_share_stream);
+    btnShareStreamMult = (Button) findViewById(R.id.btn_share_stream_mult);
     btnInt.setOnClickListener(this);
     btnExt.setOnClickListener(this);
     btnRead.setOnClickListener(this);
+    btnShareText.setOnClickListener(this);
+    btnShareStream.setOnClickListener(this);
+    btnShareStreamMult.setOnClickListener(this);
   }
 
   private void createIntFiles(){
@@ -91,7 +101,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
       case R.id.btn_read:
         requestFile();
         break;
+      case R.id.btn_share_text:
+        shareText();
+        break;
+      case R.id.btn_share_stream:
+        shareStream();
+        break;
+      case R.id.btn_share_stream_mult:
+        shareStreamMult();
+        break;
     }
+  }
+
+  private void shareText(){
+    Intent intent = new Intent();
+    intent.setAction(Intent.ACTION_SEND);
+    intent.putExtra(Intent.EXTRA_TEXT, "This is test text to send.");
+    intent.setType("type/plain");
+    startActivity(intent);
+  }
+
+  private void shareStream(){
+    Intent intent = new Intent();
+    intent.setAction(Intent.ACTION_SEND);
+    intent.putExtra(Intent.EXTRA_STREAM, "");
+    intent.setType("image/jpeg");
+    startActivity(Intent.createChooser(intent, "Send to"));
+  }
+
+  private void shareStreamMult(){
+    ArrayList<Uri> uris = new ArrayList<>();
+    Intent intent = new Intent();
+    intent.setAction(Intent.ACTION_SEND_MULTIPLE);
+    intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
+    intent.setType("image/*");
+    startActivity(Intent.createChooser(intent, "Multi Send to"));
   }
 
   private void requestFile(){
