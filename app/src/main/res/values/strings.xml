@@ -1,3 +1,4 @@
 <resources>
   <string name="app_name">FileProviderDemo</string>
+  <string name="fileprovider_authority">com.mydomain.fileprovider</string>
 </resources>
