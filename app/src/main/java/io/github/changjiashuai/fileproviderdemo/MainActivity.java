@@ -105,7 +105,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     if (resultCode != RESULT_OK){
       Toast.makeText(MainActivity.this, "get file failed", Toast.LENGTH_SHORT).show();
     }else if (requestCode==0){
-      readFile(data.getData());
+      Uri uri = data.getData();
+      Log.i(TAG, "onActivityResult: uri=" + uri);
+      readFile(uri);
     }
   }
 
